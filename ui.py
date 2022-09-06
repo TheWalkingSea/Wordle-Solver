@@ -1,38 +1,55 @@
-import enum
-import os
-import sys
 import colorama
+import platform
+import os
+import re
 
+class Red():
+    def __init__(self, letter) -> None:   
+        self.letter = letter
+    def __str__(self) -> str:
+        return colorama.Fore.RED + self.letter
 
+class Green():
+    def __init__(self, letter) -> None:
+        self.letter = letter
+    def __str__(self) -> str:
+        return colorama.Fore.GREEN + self.letter
 
-class RED:
-    def __init__(self, character):
-        self.character = character
-    def __str__(self):
-        return colorama.Fore.RED + self.character
-class YELLOW:
-    def __init__(self, character):
-        self.character = character
-    def __str__(self):
-        return colorama.Fore.YELLOW + self.character 
-class GREEN:
-    def __init__(self, character):
-        self.character = character
-    def __str__(self):
-        return colorama.Fore.GREEN + self.character
+class Yellow():
+    def __init__(self, letter) -> None:
+        self.letter = letter
+    def __str__(self) -> str:
+        return colorama.Fore.YELLOW + self.letter
 
-class word:
-    def __init__(self, word, answer):
-        self.word = word
-        self.answer = answer
-        self.beutifword = list() # Each item is an object of RYG classes
+def clearscreen():
+    if platform.system() == "Windows":
+        os.system("cls")
+    elif platform.system() in ["Linux", "Darwin"]:
+        os.system("clear")
+    else:
+        assert False, ("Not supported", platform.system())
+
+class Guess():
+    def __init__(self, cword, guess) -> None:
+        self.correctWord = cword
+        self._guess = guess
+        
+    @property
+    def guess(self):
+        for index, letter in enumerate(self._guess):
+            if letter == self.correctWord[index]: print(Green(letter), index, "green")
+            elif letter not in self.correctWord: print(Red(letter), index, "red")
+            else: print(len(re.findall(letter, self.correctWord)))
+        return 0
     
-    def parse(self):
-        for index, letter in enumerate(self.word):
-            if letter not in self.answer: self.beutifword.append(RED(letter))
-            elif letter == self.answer[index]: self.beutifword.append(GREEN(letter))
-            elif letter in self.answer and [i for i in self.beutifword if i.character != letter and isinstance(GREEN, type(i))]: self.beutifword.append(YELLOW(letter))
-            else: self.beutifword.append(RED(letter)) # Duplicate letter
-w = word("heels", "hello")
-w.parse()
-[print(i) for i in w.beutifword]
+class GLogic:
+    def __init__(self, word) -> None:
+        super().__init__(word)
+        self.correctWord = word.lower()
+
+
+
+
+if __name__ == "__main__":
+    e = Guess("hello", "lmaoe")
+    e.guess
