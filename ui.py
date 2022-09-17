@@ -54,17 +54,6 @@ class gamelogic:
                 # 4 [4]
         self.IWords.append(prettyGuess)
         return prettyGuess
-    def __str__(self) -> str: [[" 2", "2"], [" 2", "2"], [" 2", "2"]]
+    def __str__(self) -> str:
         return "\n".join(["".join(map(str, i)) for i in self.IWords]) + Fore.RESET
         # return 0
-a = gamelogic("BOOTS")
-a.makeGuess("IMOOO")
-print(a)
-
-
-[str(i) for i in self.yeyeye if i == 2]
-self.yeyeye = []
-i = ["2", "2", "2"]
-for i in self.yeye:
-    if i == 2:
-        yield str(i)
