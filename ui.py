@@ -48,12 +48,11 @@ class gamelogic:
                     yield Yellow(letter)
                 else:
                     yield Red(letter)
-                # BOOTS CWORD 2 # [3]
-                # IMOoO GUESS 1
+                # OOtTO CWORD 2 # [3]
+                # oBaSO GUESS 1
                 # 4 [4]
         # self.IWords.append(prettyGuess)
     def __str__(self) -> str:
         return "\n".join(["".join(map(str, i)) for i in self.IWords]) + Fore.RESET
         # return 0h
-
 
